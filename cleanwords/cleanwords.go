@@ -6,8 +6,13 @@ import (
 	"os"
 )
 
-// generates words.txt to contain only words with 5 characters
-// from allwords.txt
+// Helper script to filter 5 letter words from list of possible english words
+
+// What it does:
+// Reads allwords.txt, containing all possible English words
+// select only words with 5 characters and saves it in words.txt
+//
+// output from words.txt should then be saved in words/words.go
 func main() {
 	file, err := os.Open("allwords.txt")
 	if err != nil {

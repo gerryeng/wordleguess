@@ -1,10 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
-	"os"
+
+	"github.com/gerryeng/wordleguess/words"
 )
 
 func main() {
@@ -12,7 +11,7 @@ func main() {
 	var incorrectChars []string
 	var correctCharsWrongPositions = map[string][]int{}
 
-	possibleWords := readWords()
+	possibleWords := words.WORDS
 	fmt.Println(len(possibleWords), "possible words in list")
 
 	var guess string
@@ -135,25 +134,4 @@ func wordContainsIncorrectChar(word string, incorrectChars []string) bool {
 		}
 	}
 	return false
-}
-
-func readWords() []string {
-	var words []string
-	file, err := os.Open("words.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	// optionally, resize scanner's capacity for lines over 64K, see next example
-	for scanner.Scan() {
-		words = append(words, scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
-
-	return words
 }
